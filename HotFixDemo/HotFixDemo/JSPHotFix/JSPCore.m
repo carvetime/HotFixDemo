@@ -20,7 +20,7 @@ static JSContext *context;
     context[@"requireOC"] = ^(NSString *clsName){
         
         
-    }
+    };
     context[@"calloc"] = ^(NSString *className,NSString *fucName,NSString *jsFucName,NSArray *args) {
         NSLog(@"%@",className);
         NSLog(@"%@",fucName);
