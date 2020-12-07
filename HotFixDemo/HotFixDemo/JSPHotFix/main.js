@@ -1,26 +1,26 @@
 
 var golbal = this
 
-function hook(cls,ocFuc,jsFuc){
-    var fucNew = ocFuc.replace(/:/g,"")
-    log("wenjie:" + fucNew)
-    golbal[fucNew] = jsFuc
-    calloc(cls,ocFuc)
-}
+var jspClassMap = {}
 
-function callOC(clsName,fucName,args){
-    return calloc(className,fucName,args)
-}
-
-function requireOC(cls){
-    return {"className"; cls};
-}
-
-requireOC("UIView")
-;(function(){
-    hook("ViewController","test1:name2:",function(name1,name2){
-        log("js =========  test2==================:" + name1 + name2)
-        var view = UIView.alloc().init()
-        
+function JSPRequire(clsName){
+    global.__defineGetter__(clsName,function(){
+        return JSPRequire(clsName)
     })
-})()
+    if (!jspClassMap[clsName]){
+        jspClassMap[clsName] = {
+            isClass: true,
+            clsName: clsName
+        }
+    }
+    return jspClassMap[clsName]
+}
+
+function _callOC(clsName,func){
+    var ret = callOC(clsName,func)
+    return ret
+}
+
+JSPRequire("UIView")
+console.log(UIView)
+
