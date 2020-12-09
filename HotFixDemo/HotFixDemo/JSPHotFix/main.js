@@ -1,26 +1,39 @@
 
 var golbal = this
 
-var jspClassMap = {}
+
+
+function _callOC(clsName,funcName){
+    var list = []
+    list.push("js args")
+    var ret = executeSelector(clsName,funcName,list)
+    return ret
+}
+
+function _hookOC(clsName,funcName,hookFunc){
+    return hookSelector(clsName,funcName,hookFunc)
+}
 
 function JSPRequire(clsName){
-    global.__defineGetter__(clsName,function(){
-        return JSPRequire(clsName)
-    })
-    if (!jspClassMap[clsName]){
-        jspClassMap[clsName] = {
+    if (!golbal[clsName]){
+        golbal[clsName] = {
             isClass: true,
             clsName: clsName
         }
     }
-    return jspClassMap[clsName]
+    return golbal[clsName]
 }
 
-function _callOC(clsName,func){
-    var ret = callOC(clsName,func)
-    return ret
+function JSPHook(clsName, funcName, hookFunc){
+    _hookOC(clsName, funcName, hookFunc)
 }
 
 JSPRequire("UIView")
-console.log(UIView)
+JSPHook("ViewController",{"test": function(){
+    log("444444444");
+}})
+
+    
+//log(_callOC("ViewController","test0"))
+//log(_callOC("UIView","alloc"))
 

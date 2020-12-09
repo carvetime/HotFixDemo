@@ -19,16 +19,21 @@
     [JSPCore start];
     // Do any additional setup after loading the view.
     dispatch_after(1, dispatch_get_main_queue(), ^{
-        [self test0];
+        [self test];
     });
-    
-    dispatch_after(2, dispatch_get_main_queue(), ^{
-        [self performSelector:@selector(test1:) withObject:@"888888"];
-    });
-    
-    dispatch_after(3, dispatch_get_main_queue(), ^{
-        [self performSelector:@selector(test1:name2:) withObject:@"888888" withObject:@"999999"];
-    });
+//
+//    dispatch_after(2, dispatch_get_main_queue(), ^{
+//        [self performSelector:@selector(test1:) withObject:@"888888"];
+//    });
+//
+//    dispatch_after(3, dispatch_get_main_queue(), ^{
+//        [self performSelector:@selector(test1:name2:) withObject:@"888888" withObject:@"999999"];
+//    });
+}
+
+- (NSArray *)test{
+    NSLog(@"vcclass class function ======");
+    return @[@"a",@"b",@"c"];
 }
 
 - (void)test0{
