@@ -38,8 +38,6 @@ if ([typeString rangeOfString:@#_type].location != NSNotFound) {    \
     return _transFunc(result);    \
 }
 
-#define DICT_TO_RECT(_dict) CGRectMake([_dict[@"x"] intValue], [_dict[@"y"] intValue], [_dict[@"width"] intValue], [_dict[@"height"] intValue])
-
 #define JSP_FORT_STRING(_preStr,_sufStr) [NSString stringWithFormat:@"%@%@",_preStr,_sufStr]
 
 #define JSP_LAZY_INIT_METHODS if (!JSPMethods) JSPMethods = @{}.mutableCopy;
