@@ -22,6 +22,7 @@
 		CA29689D257672CC00B595C6 /* HotFixDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA29689C257672CC00B595C6 /* HotFixDemoUITests.m */; };
 		CAE631482579D8D10020404E /* JSPCore.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE631472579D8D10020404E /* JSPCore.m */; };
 		CAE631562579E38A0020404E /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = CAE631552579E38A0020404E /* main.js */; };
+		CAEA1C6425824C7E0056EBEB /* SWGMethodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEA1C6325824C7E0056EBEB /* SWGMethodModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		CAE631462579D8D10020404E /* JSPCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSPCore.h; sourceTree = "<group>"; };
 		CAE631472579D8D10020404E /* JSPCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSPCore.m; sourceTree = "<group>"; };
 		CAE631552579E38A0020404E /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		CAEA1C6225824C7E0056EBEB /* SWGMethodModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGMethodModel.h; sourceTree = "<group>"; };
+		CAEA1C6325824C7E0056EBEB /* SWGMethodModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWGMethodModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				CA0B2FCA258199080037BA48 /* SWGCompatibilityMacros.h */,
 				CA0B2FCE25819F440037BA48 /* SWGProxy.h */,
 				CA0B2FCF25819F440037BA48 /* SWGProxy.m */,
+				CAEA1C6225824C7E0056EBEB /* SWGMethodModel.h */,
+				CAEA1C6325824C7E0056EBEB /* SWGMethodModel.m */,
 			);
 			path = SWGNeedle;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				CA29687D257672CB00B595C6 /* ViewController.m in Sources */,
 				CA0B2FAF2581900A0037BA48 /* SWGUtil.m in Sources */,
 				CA296877257672CB00B595C6 /* AppDelegate.m in Sources */,
+				CAEA1C6425824C7E0056EBEB /* SWGMethodModel.m in Sources */,
 				CA0B2FD025819F440037BA48 /* SWGProxy.m in Sources */,
 				CA0B2FA025818DE90037BA48 /* SWGNeedle.m in Sources */,
 				CA296888257672CB00B595C6 /* main.m in Sources */,
