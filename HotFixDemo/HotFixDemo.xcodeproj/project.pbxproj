@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA0B2FA025818DE90037BA48 /* SWGNeedle.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0B2F9F25818DE90037BA48 /* SWGNeedle.m */; };
+		CA0B2FAF2581900A0037BA48 /* SWGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0B2FAE2581900A0037BA48 /* SWGUtil.m */; };
+		CA0B2FC6258194B40037BA48 /* SWGNeedleConst.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0B2FC5258194B40037BA48 /* SWGNeedleConst.m */; };
+		CA0B2FD025819F440037BA48 /* SWGProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0B2FCF25819F440037BA48 /* SWGProxy.m */; };
 		CA296877257672CB00B595C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA296876257672CB00B595C6 /* AppDelegate.m */; };
 		CA29687A257672CB00B595C6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA296879257672CB00B595C6 /* SceneDelegate.m */; };
 		CA29687D257672CB00B595C6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA29687C257672CB00B595C6 /* ViewController.m */; };
@@ -38,6 +42,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA0B2F9E25818DE90037BA48 /* SWGNeedle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGNeedle.h; sourceTree = "<group>"; };
+		CA0B2F9F25818DE90037BA48 /* SWGNeedle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWGNeedle.m; sourceTree = "<group>"; };
+		CA0B2FAD2581900A0037BA48 /* SWGUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGUtil.h; sourceTree = "<group>"; };
+		CA0B2FAE2581900A0037BA48 /* SWGUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWGUtil.m; sourceTree = "<group>"; };
+		CA0B2FC4258194B40037BA48 /* SWGNeedleConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGNeedleConst.h; sourceTree = "<group>"; };
+		CA0B2FC5258194B40037BA48 /* SWGNeedleConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWGNeedleConst.m; sourceTree = "<group>"; };
+		CA0B2FCA258199080037BA48 /* SWGCompatibilityMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGCompatibilityMacros.h; sourceTree = "<group>"; };
+		CA0B2FCE25819F440037BA48 /* SWGProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGProxy.h; sourceTree = "<group>"; };
+		CA0B2FCF25819F440037BA48 /* SWGProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWGProxy.m; sourceTree = "<group>"; };
 		CA296872257672CB00B595C6 /* HotFixDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotFixDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA296875257672CB00B595C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CA296876257672CB00B595C6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -86,6 +99,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA0B2F9D25818D670037BA48 /* SWGNeedle */ = {
+			isa = PBXGroup;
+			children = (
+				CA0B2F9E25818DE90037BA48 /* SWGNeedle.h */,
+				CA0B2F9F25818DE90037BA48 /* SWGNeedle.m */,
+				CA0B2FAD2581900A0037BA48 /* SWGUtil.h */,
+				CA0B2FAE2581900A0037BA48 /* SWGUtil.m */,
+				CA0B2FC4258194B40037BA48 /* SWGNeedleConst.h */,
+				CA0B2FC5258194B40037BA48 /* SWGNeedleConst.m */,
+				CA0B2FCA258199080037BA48 /* SWGCompatibilityMacros.h */,
+				CA0B2FCE25819F440037BA48 /* SWGProxy.h */,
+				CA0B2FCF25819F440037BA48 /* SWGProxy.m */,
+			);
+			path = SWGNeedle;
+			sourceTree = "<group>";
+		};
 		CA296869257672CB00B595C6 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +138,7 @@
 		CA296874257672CB00B595C6 /* HotFixDemo */ = {
 			isa = PBXGroup;
 			children = (
+				CA0B2F9D25818D670037BA48 /* SWGNeedle */,
 				CAE6313C2579D6EC0020404E /* JSPHotFix */,
 				CA296875257672CB00B595C6 /* AppDelegate.h */,
 				CA296876257672CB00B595C6 /* AppDelegate.m */,
@@ -283,8 +313,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0B2FC6258194B40037BA48 /* SWGNeedleConst.m in Sources */,
 				CA29687D257672CB00B595C6 /* ViewController.m in Sources */,
+				CA0B2FAF2581900A0037BA48 /* SWGUtil.m in Sources */,
 				CA296877257672CB00B595C6 /* AppDelegate.m in Sources */,
+				CA0B2FD025819F440037BA48 /* SWGProxy.m in Sources */,
+				CA0B2FA025818DE90037BA48 /* SWGNeedle.m in Sources */,
 				CA296888257672CB00B595C6 /* main.m in Sources */,
 				CAE631482579D8D10020404E /* JSPCore.m in Sources */,
 				CA29687A257672CB00B595C6 /* SceneDelegate.m in Sources */,

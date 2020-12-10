@@ -6,7 +6,7 @@
 //
 
 #import "ViewController.h"
-#import "JSPCore.h"
+#import "SWGNeedle.h"
 
 @interface ViewController ()
 
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [JSPCore start];
+    [SWGNeedle prepare];
     // Do any additional setup after loading the view.
     dispatch_after(1, dispatch_get_main_queue(), ^{
         [self test];
