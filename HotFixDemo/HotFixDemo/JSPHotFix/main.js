@@ -29,8 +29,9 @@ function JSPHook(clsName, funcName, hookFunc){
 }
 
 JSPRequire("UIView")
-JSPHook("ViewController",{"test": function(){
-    log("444444444");
+JSPHook("ViewController",{
+    test:function(){
+    log("444444444========");
 }})
 
     
