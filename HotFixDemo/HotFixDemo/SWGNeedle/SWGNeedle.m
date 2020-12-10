@@ -12,10 +12,9 @@
 #import "SWGUtil.h"
 #import "SWGNeedleConst.h"
 #import "SWGCompatibilityMacros.h"
-
+#import "SWGProxy.h"
 
 static const JSContext *context;
-static const NSMutableDictionary *SWGMethods;
 
 @implementation SWGNeedle
 
@@ -43,7 +42,6 @@ static const NSMutableDictionary *SWGMethods;
 
 static id hookSelector(NSString *clsName, JSValue *jsMethods, NSArray *args){
     
-    
     Class cls = NSClassFromString(clsName);
     unsigned int countOfmethods = 0;
     Method *methodsAry = class_copyMethodList(cls, &countOfmethods);
@@ -60,29 +58,6 @@ static id hookSelector(NSString *clsName, JSValue *jsMethods, NSArray *args){
     return nil;
 }
 
-static void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
-    SEL selector = NSSelectorFromString(selName);
-    NSString *clsName = NSStringFromClass(cls);
-    NSMethodSignature *methodSignature = [cls instanceMethodSignatureForSelector:selector];
-    Method method = class_getInstanceMethod(cls, selector);
-    char *typeDesc = (char *)method_getTypeEncoding(method);
-    IMP orgImp = class_respondsToSelector(cls, selector);
-    class_replaceMethod(cls, selector, class_getMethodImplementation(cls, @selector(__JPSImplementSelector)), typeDesc);
-    IMP forwadImp = class_replaceMethod(cls, @selector(forwardInvocation:), (IMP)(JSPForwardInvocation), @"v@:@");
-    NSString *JSPSelName = SWG_FORT_STRING(SWGNeedlePrefixName, selName);
-    SEL JSPSel = NSSelectorFromString(JSPSelName);
-    SWG_LAZY_INIT_DICT(SWGMethods);
-    SWGMethods[clsName] = jsMethod;
-    class_addMethod(cls, JSPSel, commonJSImplement, typeDesc);
-}
-
-static void commonJSImplement(id slf, SEL sel){
-    NSString *selectorName = NSStringFromSelector(sel);
-    NSString *clsName = NSStringFromClass([slf class]);
-    JSValue *jsValue = [[JSValue alloc] init];
-    JSValue *func = SWGMethods[clsName];
-    [func callWithArguments:nil];
-}
 
 static void JSPForwardInvocation(id slf,SEL sel,NSInvocation *invocation){
     NSString *selectorName = NSStringFromSelector(invocation.selector);
@@ -181,76 +156,7 @@ static id executeSelector(NSString *clsName, NSString *selName, NSArray *args){
 }
 
 
-static id formatOCObj(id obj) {
-    if ([obj isKindOfClass:[NSString class]] || [obj isKindOfClass:[NSNumber class]]) {
-        return obj;
-    }
-    if ([obj isKindOfClass:[NSArray class]]) {
-        NSMutableArray *newArr = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [obj count]; i ++) {
-            [newArr addObject:formatOCObj(obj[i])];
-        }
-        return newArr;
-    }
-    if ([obj isKindOfClass:[NSDictionary class]]) {
-        NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
-        for (NSString *key in [obj allKeys]) {
-            [newDict setObject:formatOCObj(obj[key]) forKey:key];
-        }
-        return newDict;
-    }
-    if ([obj isKindOfClass:NSClassFromString(@"NSBlock")]) {
-        return obj;
-    }
-    
-    return toJSObj(obj);
-}
 
-static inline CGRect dictToRect(NSDictionary *dict)
-{
-    return CGRectMake([dict[@"x"] intValue], [dict[@"y"] intValue], [dict[@"width"] intValue], [dict[@"height"] intValue]);
-}
-
-static inline CGPoint dictToPoint(NSDictionary *dict)
-{
-    return CGPointMake([dict[@"x"] intValue], [dict[@"y"] intValue]);
-}
-
-static inline CGSize dictToSize(NSDictionary *dict)
-{
-    return CGSizeMake([dict[@"width"] intValue], [dict[@"height"] intValue]);
-}
-
-static inline NSRange dictToRange(NSDictionary *dict)
-{
-    return NSMakeRange([dict[@"location"] intValue], [dict[@"length"] intValue]);
-}
-
-static inline NSDictionary *toJSObj(id obj)
-{
-    if (!obj) return nil;
-    return @{@"__isObj": @(YES), @"cls": NSStringFromClass([obj class]), @"obj": obj};
-}
-
-static inline NSDictionary *rectToDictionary(CGRect rect)
-{
-    return @{@"x": @(rect.origin.x), @"y": @(rect.origin.y), @"width": @(rect.size.width), @"height": @(rect.size.height)};
-}
-
-static inline NSDictionary *pointToDictionary(CGPoint point)
-{
-    return @{@"x": @(point.x), @"y": @(point.y)};
-}
-
-static inline NSDictionary *sizeToDictionary(CGSize size)
-{
-    return @{@"width": @(size.width), @"height": @(size.height)};
-}
-
-static inline NSDictionary *rangeToDictionary(NSRange range)
-{
-    return @{@"location": @(range.location), @"length": @(range.length)};
-}
 
 
 @end
