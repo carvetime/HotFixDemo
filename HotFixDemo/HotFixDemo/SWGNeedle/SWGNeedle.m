@@ -12,6 +12,7 @@
 #import "SWGUtil.h"
 #import "SWGNeedleConst.h"
 #import "SWGCompatibilityMacros.h"
+#import "SWGProxy.h"
 
 
 static const JSContext *context;
@@ -61,19 +62,27 @@ static id hookSelector(NSString *clsName, JSValue *jsMethods, NSArray *args){
 }
 
 static void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
-    SEL selector = NSSelectorFromString(selName);
+    cls = NSClassFromString(@"SWGProxy");
+    SEL selector = NSSelectorFromString(@"forwardMethod");
     NSString *clsName = NSStringFromClass(cls);
-    NSMethodSignature *methodSignature = [cls instanceMethodSignatureForSelector:selector];
-    Method method = class_getInstanceMethod(cls, selector);
-    char *typeDesc = (char *)method_getTypeEncoding(method);
-    IMP orgImp = class_respondsToSelector(cls, selector);
-    class_replaceMethod(cls, selector, class_getMethodImplementation(cls, @selector(__JPSImplementSelector)), typeDesc);
-    IMP forwadImp = class_replaceMethod(cls, @selector(forwardInvocation:), (IMP)(JSPForwardInvocation), @"v@:@");
-    NSString *JSPSelName = SWG_FORT_STRING(SWGNeedlePrefixName, selName);
-    SEL JSPSel = NSSelectorFromString(JSPSelName);
-    SWG_LAZY_INIT_DICT(SWGMethods);
-    SWGMethods[clsName] = jsMethod;
-    class_addMethod(cls, JSPSel, commonJSImplement, typeDesc);
+    NSMethodSignature *methodSignature = [cls methodSignatureForSelector:selector];
+//    Method method = class_getInstanceMethod(cls, selector);
+//    char *typeDesc = (char *)method_getTypeEncoding(method);
+//    IMP orgImp = class_respondsToSelector(cls, selector);
+//    class_replaceMethod(cls, selector, class_getMethodImplementation(cls, @selector(__JPSImplementSelector)), typeDesc);
+//    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+    
+    SWGProxy *proxy = [[SWGProxy alloc] initWithTarget1:@"123"];
+    
+//    [invocation setTarget:proxy];
+//    [invocation setSelector:selector];
+//    [invocation invoke];
+//    IMP forwadImp = class_replaceMethod(cls, @selector(forwardInvocation:), (IMP)(JSPForwardInvocation), @"v@:@");
+//    NSString *JSPSelName = SWG_FORT_STRING(SWGNeedlePrefixName, selName);
+//    SEL JSPSel = NSSelectorFromString(JSPSelName);
+//    SWG_LAZY_INIT_DICT(SWGMethods);
+//    SWGMethods[clsName] = jsMethod;
+//    class_addMethod(cls, JSPSel, commonJSImplement, typeDesc);
 }
 
 static void commonJSImplement(id slf, SEL sel){

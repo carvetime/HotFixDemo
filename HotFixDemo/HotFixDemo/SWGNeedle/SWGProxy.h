@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SWGProxy : NSProxy
+-(id)initWithTarget1:(id)t1;
+//- (void)forwardMethod;
 
 @end
 
