@@ -29,10 +29,10 @@ function SWGHook(clsName, funcName, hookFunc){
 }
 
 SWGRequire("UIView")
-SWGRequire("NSLog")
 SWGHook("ViewController",{
-    test1_name2_:function(arg1,arg2){
+    _test1_$_name2$:function(arg1,arg2){
         var ary = ["a","b", "c"];
         log(ary[1])
-}})
+    }
+})
 

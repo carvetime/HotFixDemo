@@ -22,12 +22,12 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-    [self test1:@"nihao" name2:@"xiaoming"];
+    [self _test1_:@"nihao" _name2:@"xiaoming"];
 }
 
 
 
-- (void)test1:(NSString *)name name2:(NSString *)name2{
+- (void)_test1_:(NSString *)name _name2:(NSString *)name2{
     NSMutableArray *ary1 = @[].mutableCopy;
     ary1[0] = @"a";
     ary1[1] = @"b";
