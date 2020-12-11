@@ -75,6 +75,46 @@ if ([typeString rangeOfString:@#_type].location != NSNotFound) {    \
     break; \
 }
 
+#define SWG_DEFINE_METHOD_IMP(_methods, _args)  \
+static void SWGCommonImplRetEmpty (id self, SEL selector) { \
+    NSString *selectorName = NSStringFromSelector(selector);    \
+    NSString *clsName = NSStringFromClass([self class]); \
+    [_methods[clsName][selectorName] callWithArguments:_args];    \
+}
+
+
+#define SWG_DEFINE_METHOD_IMP_RET_OBJC(_retType, _methods, _args)  \
+static _retType SWGCommonImplRetObjc (id self, SEL selector) { \
+    NSString *selectorName = NSStringFromSelector(selector);    \
+    NSString *clsName = NSStringFromClass([self class]); \
+    JSValue *ret = [_methods[clsName][selectorName] callWithArguments:_args];    \
+    return [ret toObject] ;    \
+}
+
+#define SWG_DEFINE_METHOD_IMP_RET(_retType, _methods, _args, _typeSel, _name)  \
+static _retType SWG_DEFINE_METHOD_IMP_NAME(_name) (id self, SEL selector) { \
+    NSString *selectorName = NSStringFromSelector(selector);    \
+    NSString *clsName = NSStringFromClass([self class]); \
+    JSValue *ret = [_methods[clsName][selectorName] callWithArguments:_args];    \
+    return [[ret toObject] _typeSel] ;    \
+}
+
+#define SWG_DEFINE_METHOD_IMP_RET_STRUCT(_retType, _methods, _args, _transFunc, _name)  \
+static _retType SWG_DEFINE_METHOD_IMP_NAME(_name) (id self, SEL selector) { \
+    NSString *selectorName = NSStringFromSelector(selector);    \
+    NSString *clsName = NSStringFromClass([self class]); \
+    JSValue *ret = [_methods[clsName][selectorName] callWithArguments:_args];    \
+    _transFunc ;    \
+}
+
+#define SWG_DEFINE_METHOD_IMP_NAME(_name) SWGCommonImplRet##_name
+
+#define SWG_OVERRIDE_NAME_RET_CASE(_type, _typeChar, _ImplName)   \
+case _typeChar : { \
+    _ImplName = (IMP)SWG_DEFINE_METHOD_IMP_NAME(_type); \
+    break;  \
+}
+
 
 #define SWG_SAVE_FORT_INVCTN_ARGS(_invoctnArgs,_argList) _invoctnArgs = formatOCObj(_argList);
 

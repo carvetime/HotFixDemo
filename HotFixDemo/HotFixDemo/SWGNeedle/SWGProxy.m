@@ -18,6 +18,54 @@ static NSArray *SWGInvocationArgs;
 
 @implementation SWGProxy
 
+#pragma mark - js function implement
+SWG_DEFINE_METHOD_IMP(SWGMethods,SWGInvocationArgs)
+
+SWG_DEFINE_METHOD_IMP_RET_OBJC(id,SWGMethods,SWGInvocationArgs)
+
+SWG_DEFINE_METHOD_IMP_RET(char,SWGMethods,SWGInvocationArgs,charValue,CharVal)
+SWG_DEFINE_METHOD_IMP_RET(unsigned char,SWGMethods,SWGInvocationArgs,unsignedCharValue,UncharVal)
+SWG_DEFINE_METHOD_IMP_RET(short,SWGMethods,SWGInvocationArgs,shortValue,ShtVal)
+SWG_DEFINE_METHOD_IMP_RET(unsigned short,SWGMethods,SWGInvocationArgs,unsignedShortValue,UnshtVal)
+SWG_DEFINE_METHOD_IMP_RET(int,SWGMethods,SWGInvocationArgs,intValue,IntVal)
+SWG_DEFINE_METHOD_IMP_RET(unsigned int,SWGMethods,SWGInvocationArgs,unsignedIntValue,UnintVal)
+SWG_DEFINE_METHOD_IMP_RET(long,SWGMethods,SWGInvocationArgs,longValue,longVal)
+SWG_DEFINE_METHOD_IMP_RET(unsigned long,SWGMethods,SWGInvocationArgs,unsignedLongValue,UnlongVal)
+SWG_DEFINE_METHOD_IMP_RET(long long,SWGMethods,SWGInvocationArgs,longLongValue,LongLongVal)
+SWG_DEFINE_METHOD_IMP_RET(unsigned long long,SWGMethods,SWGInvocationArgs,unsignedLongLongValue,UnLongLongVal)
+SWG_DEFINE_METHOD_IMP_RET(float,SWGMethods,SWGInvocationArgs,floatValue,FloatVal)
+SWG_DEFINE_METHOD_IMP_RET(double,SWGMethods,SWGInvocationArgs,doubleValue,DoubleVal)
+SWG_DEFINE_METHOD_IMP_RET(BOOL,SWGMethods,SWGInvocationArgs,boolValue,BoolVal)
+
+SWG_DEFINE_METHOD_IMP_RET_STRUCT(CGRect,SWGMethods,SWGInvocationArgs,return dictToRect([ret toObject]),Rect)
+SWG_DEFINE_METHOD_IMP_RET_STRUCT(CGSize,SWGMethods,SWGInvocationArgs,return dictToSize([ret toObject]),Size)
+SWG_DEFINE_METHOD_IMP_RET_STRUCT(CGPoint,SWGMethods,SWGInvocationArgs,return dictToPoint([ret toObject]),Point)
+SWG_DEFINE_METHOD_IMP_RET_STRUCT(NSRange,SWGMethods,SWGInvocationArgs,return dictToRange([ret toObject]),Range)
+
+
+IMP SWGIMPName(NSMethodSignature *methodSignature){
+    IMP SWGImplementationName;
+    const char *retType = [methodSignature methodReturnType];
+    switch (retType[0]) {
+            SWG_OVERRIDE_NAME_RET_CASE(Empty, 'v',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(Objc, '@', SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(CharVal, 'c',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(UncharVal, 'C',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(ShtVal, 's',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnshtVal, 'S',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(IntVal, 'i',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnintVal, 'I',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(longVal, 'l',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnlongVal, 'L',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(LongLongVal, 'q',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnLongLongVal, 'Q',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(FloatVal, 'f',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(DoubleVal, 'd',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(BoolVal, 'B',SWGImplementationName)
+    }
+    return SWGImplementationName;
+}
+
 void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
     SEL selector = NSSelectorFromString(selName);
     NSString *clsName = NSStringFromClass(cls);
@@ -31,16 +79,7 @@ void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
     SEL swgSel = NSSelectorFromString(swgSelName);
     SWG_SET_METHOD_DICT(SWGMethods,swgSelName,jsMethod);
     SWGMethods[clsName] = jsMethod;
-    class_addMethod(cls, swgSel, commonJSImplement, typeDesc);
-}
-
-
-static void commonJSImplement(id slf, SEL sel){
-    NSString *selectorName = NSStringFromSelector(sel);
-    NSString *clsName = NSStringFromClass([slf class]);
-    JSValue *jsValue = [[JSValue alloc] init];
-    JSValue *func = SWG_GET_JS_METHOD(SWGMethods,clsName)
-    [func callWithArguments:SWGInvocationArgs];
+    class_addMethod(cls, swgSel, SWGIMPName(methodSignature), typeDesc);
 }
 
 static void SWGForwardInvocation(id slf,SEL sel,NSInvocation *invocation){
