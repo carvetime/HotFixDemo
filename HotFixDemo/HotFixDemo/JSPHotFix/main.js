@@ -28,10 +28,20 @@ function SWGHook(clsName, funcName, hookFunc){
     _hookOC(clsName, funcName, hookFunc)
 }
 
-SWGRequire("UIView")
-SWGHook("ViewController",{
-    _test1_$_name2$:function(arg1,arg2){
-        return "cffff";
-    }
-})
+//SWGRequire("UIView")
+//SWGHook("ViewController",{
+//    _test2_$_name3$:function(arg1,arg2){
+//        log(arg1)
+//    },
+//    $_test1_$_name2$:function(arg1,arg2){
+//        log(arg1)
+//        return arg1
+//    },
+//})
 
+
+SWGHook("ViewController",{
+    test2$name2$:function(arg1,arg2){
+            log(arg1)
+        }
+})

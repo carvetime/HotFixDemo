@@ -43,27 +43,27 @@ SWG_DEFINE_METHOD_IMP_RET_STRUCT(CGPoint,SWGMethods,SWGInvocationArgs,return dic
 SWG_DEFINE_METHOD_IMP_RET_STRUCT(NSRange,SWGMethods,SWGInvocationArgs,return dictToRange([ret toObject]),Range)
 
 
-IMP SWGIMPName(NSMethodSignature *methodSignature){
-    IMP SWGImplementationName;
+IMP SWGImplementationName(NSMethodSignature *methodSignature){
+    IMP SWGImpName;
     const char *retType = [methodSignature methodReturnType];
     switch (retType[0]) {
-            SWG_OVERRIDE_NAME_RET_CASE(Empty, 'v',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(Objc, '@', SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(CharVal, 'c',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(UncharVal, 'C',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(ShtVal, 's',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(UnshtVal, 'S',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(IntVal, 'i',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(UnintVal, 'I',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(longVal, 'l',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(UnlongVal, 'L',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(LongLongVal, 'q',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(UnLongLongVal, 'Q',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(FloatVal, 'f',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(DoubleVal, 'd',SWGImplementationName)
-            SWG_OVERRIDE_NAME_RET_CASE(BoolVal, 'B',SWGImplementationName)
+            SWG_OVERRIDE_NAME_RET_CASE(Empty, 'v',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(Objc, '@', SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(CharVal, 'c',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UncharVal, 'C',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(ShtVal, 's',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnshtVal, 'S',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(IntVal, 'i',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnintVal, 'I',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(longVal, 'l',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnlongVal, 'L',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(LongLongVal, 'q',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnLongLongVal, 'Q',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(FloatVal, 'f',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(DoubleVal, 'd',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(BoolVal, 'B',SWGImpName)
     }
-    return SWGImplementationName;
+    return SWGImpName;
 }
 
 void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
@@ -72,14 +72,17 @@ void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
     NSMethodSignature *methodSignature = [cls instanceMethodSignatureForSelector:selector];
     Method method = class_getInstanceMethod(cls, selector);
     char *typeDesc = (char *)method_getTypeEncoding(method);
-//    IMP orgImp = class_respondsToSelector(cls, selector);
-    class_replaceMethod(cls, selector, class_getMethodImplementation(cls, @selector(__JPSImplementSelector)), typeDesc);
-    IMP forwadImp = class_replaceMethod(cls, @selector(forwardInvocation:), (IMP)(SWGForwardInvocation), @"v@:@");
+    char *methodTypes = SWGNeedleFuncRetEmptyType;
+    if ([selName hasPrefix:@":"]){
+        methodTypes = SWGNeedleFuncHasRetType;
+        selName = [selName substringFromIndex:1];
+    }
+    class_replaceMethod(cls, selector, class_getMethodImplementation(cls, @selector(__SWGImplementSelector)), typeDesc);
+    IMP forwadImp = class_replaceMethod(cls, @selector(forwardInvocation:), (IMP)(SWGForwardInvocation), methodTypes);
     NSString *swgSelName = SWG_FORT_STRING(SWGNeedlePrefixName, selName);
-    SEL swgSel = NSSelectorFromString(swgSelName);
-    SWG_SET_METHOD_DICT(SWGMethods,swgSelName,jsMethod);
-    SWGMethods[clsName] = jsMethod;
-    class_addMethod(cls, swgSel, SWGIMPName(methodSignature), typeDesc);
+    SEL SWGSel = NSSelectorFromString(swgSelName);
+    SWG_SET_METHOD_DICT(SWGMethods,clsName,swgSelName,jsMethod);
+    class_addMethod(cls, SWGSel, SWGImplementationName(methodSignature), typeDesc);
 }
 
 static void SWGForwardInvocation(id slf,SEL sel,NSInvocation *invocation){

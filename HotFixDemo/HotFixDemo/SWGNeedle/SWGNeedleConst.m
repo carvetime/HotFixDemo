@@ -11,5 +11,7 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 
 NSString * const SWGNeedlePrefixName = @"SWGNeedle";
+char * const SWGNeedleFuncRetEmptyType = "v@:@";
+char * const SWGNeedleFuncHasRetType = "@@:@";
 
 #endif

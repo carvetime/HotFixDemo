@@ -5,15 +5,17 @@
 //  Created by gaowenjie3 on 2020/12/10.
 //
 
+#import "SWGNeedleConst.h"
+
 #ifndef SWGCompatibilityMacros_h
 #define SWGCompatibilityMacros_h
 
 
 #define SWG_FORT_STRING(_preStr,_sufStr) [NSString stringWithFormat:@"%@%@",_preStr,_sufStr]
 
-#define SWG_SET_METHOD_DICT(_dict, _name, _jsValue) \
+#define SWG_SET_METHOD_DICT(_dict, _clsName, _funcName, _jsValue) \
 if (!_dict) _dict = @{}.mutableCopy;  \
-if (!_dict[_name]) _dict[_name] = _jsValue
+if (!_dict[_clsName]) _dict[_clsName] = @{_funcName:_jsValue};
 
 #define SWG_GET_JS_METHOD(_dict,_name) _dict ? _dict[_name] : nil;
 
@@ -114,7 +116,6 @@ case _typeChar : { \
     _ImplName = (IMP)SWG_DEFINE_METHOD_IMP_NAME(_type); \
     break;  \
 }
-
 
 #define SWG_SAVE_FORT_INVCTN_ARGS(_invoctnArgs,_argList) _invoctnArgs = formatOCObj(_argList);
 

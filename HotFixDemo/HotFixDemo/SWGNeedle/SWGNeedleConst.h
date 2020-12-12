@@ -11,5 +11,7 @@
 #import <Foundation/Foundation.h>
 
 FOUNDATION_EXPORT NSString * const SWGNeedlePrefixName;
+FOUNDATION_EXPORT char * const SWGNeedleFuncRetEmptyType;
+FOUNDATION_EXPORT char * const SWGNeedleFuncHasRetType;
 
 #endif
