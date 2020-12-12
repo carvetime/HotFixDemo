@@ -14,6 +14,7 @@
 
 @implementation ViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [SWGNeedle prepare];
@@ -24,8 +25,9 @@
     [super touchesBegan:touches withEvent:event];
 //    NSString *test =  [self _test1_:@"has ret" _name2:@"xiaoming"];
 //    NSLog(@"%@",test);
-    UIView *view = [self test2:@"no ret" name2:@"xiaoming"];
-    [self.view addSubview:view];
+//    UIView *view = [self test2:@"no ret" name2:@"xiaoming"];
+//    [self.view addSubview:view];
+    [self test3:@"add subviwe" name3:@"green"];
 }
 
 
@@ -35,6 +37,13 @@
     ary1[1] = @"b";
     NSLog(@"%@",ary1[2]);
     return nil;
+}
+
+- (void)test3:(NSString *)name name3:(NSString *)name2{
+    NSMutableArray *ary1 = @[].mutableCopy;
+    ary1[0] = @"a";
+    ary1[1] = @"b";
+    NSLog(@"%@",ary1[2]);
 }
 
 
