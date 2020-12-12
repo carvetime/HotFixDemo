@@ -75,7 +75,7 @@ static id executeSelector(id obj,NSString *clsName, NSString *selName, NSArray *
     
     NSMethodSignature *methodSignature;
     NSInvocation *invocation;
-    if (obj){
+    if (obj && ![obj isEqual:[NSNull null]]){
         methodSignature = [cls instanceMethodSignatureForSelector:selector];
         invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
         [invocation setTarget:obj];

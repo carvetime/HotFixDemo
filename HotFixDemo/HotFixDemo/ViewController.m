@@ -24,15 +24,17 @@
     [super touchesBegan:touches withEvent:event];
 //    NSString *test =  [self _test1_:@"has ret" _name2:@"xiaoming"];
 //    NSLog(@"%@",test);
-    [self test2:@"no ret" name2:@"xiaoming"];
+    UIView *view = [self test2:@"no ret" name2:@"xiaoming"];
+    [self.view addSubview:view];
 }
 
 
-- (void)test2:(NSString *)name name2:(NSString *)name2{
+- (UIView *)test2:(NSString *)name name2:(NSString *)name2{
     NSMutableArray *ary1 = @[].mutableCopy;
     ary1[0] = @"a";
     ary1[1] = @"b";
     NSLog(@"%@",ary1[2]);
+    return nil;
 }
 
 
@@ -45,8 +47,9 @@
 }
 
 
-- (void)haha:(NSString *)name{
+- (NSString *)haha:(NSString *)name{
     NSLog(@"haha %@",name);
+    return name;
 }
 
 @end

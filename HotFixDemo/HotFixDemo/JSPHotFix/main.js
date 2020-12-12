@@ -29,6 +29,11 @@ function SWGHook(clsName, func, hookFunc){
 
 SWGHook("ViewController",{
     test2$name2$:function($,arg1,arg2){
-        _callOC($["obj"],"ViewController","haha:",["xiaowang"])
+//        var name = _callOC($["obj"],"ViewController","haha:",["xiaowang"]);
+        var vAlloc = _callOC(null,"UIView","alloc",null);
+        var view = _callOC(vAlloc["obj"],"UIView","initWithFrame:",[{x:20, y:20, width:100, height:100}])
+        var color = _callOC(null,"UIColor","greenColor",null)
+        _callOC(view["obj"],"UIView","setBackgroundColor:",[color["obj"]]);
+        return view["obj"]
     }
 })
