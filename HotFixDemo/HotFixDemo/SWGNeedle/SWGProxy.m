@@ -91,7 +91,7 @@ static void SWGForwardInvocation(id slf,SEL sel,NSInvocation *invocation){
     NSString *selectorName = NSStringFromSelector(invocation.selector);
     SEL jsSelector = NSSelectorFromString(SWG_FORT_STRING(SWGNeedlePrefixName, selectorName));
     
-    NSMutableArray *argList = exTractArgList(invocation, methodSignature);
+    NSMutableArray *argList = exTractArgList(slf,invocation, methodSignature);
     
     SWG_SAVE_FORT_INVCTN_ARGS(SWGInvocationArgs,argList)
     [invocation setSelector:jsSelector];
@@ -99,9 +99,12 @@ static void SWGForwardInvocation(id slf,SEL sel,NSInvocation *invocation){
     SWG_CLEAR_INVCTN_ARGS(SWGInvocationArgs)
 }
 
-static NSMutableArray * exTractArgList(NSInvocation *invocation,NSMethodSignature *methodSignature){
+static NSMutableArray * exTractArgList(id slf, NSInvocation *invocation, NSMethodSignature *methodSignature){
     NSInteger numberOfArguments = [methodSignature numberOfArguments];
     NSMutableArray *argList = [[NSMutableArray alloc] init];
+    if (!class_isMetaClass(object_getClass(slf))) {
+        [argList addObject:slf];
+    }
     for (NSUInteger i = 2; i < numberOfArguments; i++) {
         const char *argType = [methodSignature getArgumentTypeAtIndex:i];
         switch(argType[0]) {

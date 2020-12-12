@@ -3,15 +3,15 @@ var golbal = this
 
 
 
-function _callOC(clsName,funcName){
+function _callOC(instance,clsName,funcName){
     var list = []
     list.push("js args")
-    var ret = executeSelector(clsName,funcName,list)
+    var ret = executeSelector(instance,clsName,funcName,list)
     return ret
 }
 
-function _hookOC(clsName,funcName,hookFunc){
-    return hookSelector(clsName,funcName,hookFunc)
+function _hookOC(clsName,funcName){
+    return hookSelector(clsName,funcName)
 }
 
 function SWGRequire(clsName){
@@ -24,24 +24,13 @@ function SWGRequire(clsName){
     return golbal[clsName]
 }
 
-function SWGHook(clsName, funcName, hookFunc){
-    _hookOC(clsName, funcName, hookFunc)
+function SWGHook(clsName, func, hookFunc){
+    _hookOC(clsName, func,hookFunc)
 }
-
-//SWGRequire("UIView")
-//SWGHook("ViewController",{
-//    _test2_$_name3$:function(arg1,arg2){
-//        log(arg1)
-//    },
-//    $_test1_$_name2$:function(arg1,arg2){
-//        log(arg1)
-//        return arg1
-//    },
-//})
 
 
 SWGHook("ViewController",{
-    test2$name2$:function(arg1,arg2){
-            log(arg1)
-        }
+    test2$name2$:function($,arg1,arg2){
+        _callOC($["obj"],"ViewController","haha")
+    }
 })

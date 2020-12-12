@@ -22,8 +22,8 @@ static const JSContext *context;
     
     context = [[JSContext alloc] init];
 
-    context[@"log"] = ^(NSString *msg){
-        NSLog(@"log:%@",msg);
+    context[@"log"] = ^(JSValue *val){
+        NSLog(@"log:%@",val);
     };
     context[@"requireClass"] = ^(NSString *clsName){
         
@@ -32,8 +32,8 @@ static const JSContext *context;
         return hookSelector(className, jsMethods, args);
     };
     
-    context[@"executeSelector"] = ^(NSString *className,NSString *fucName, NSArray *args) {
-        return executeSelector(className, fucName, args);
+    context[@"executeSelector"] = ^(id obj,NSString *className,NSString *fucName, NSArray *args) {
+        return executeSelector(obj,className, fucName, args);
     };
     NSString *path = [[NSBundle mainBundle] pathForResource:@"main" ofType:@"js"];
     NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
@@ -69,12 +69,21 @@ static void JSPForwardInvocation(id slf,SEL sel,NSInvocation *invocation){
 
 
 
-static id executeSelector(NSString *clsName, NSString *selName, NSArray *args){
+static id executeSelector(id obj,NSString *clsName, NSString *selName, NSArray *args){
     Class cls = NSClassFromString(clsName);
     SEL selector = NSSelectorFromString(selName);
-    NSMethodSignature *methodSignature = [cls methodSignatureForSelector:selector];
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-    [invocation setTarget:cls];
+    
+    NSMethodSignature *methodSignature;
+    NSInvocation *invocation;
+    if (obj){
+        methodSignature = [cls instanceMethodSignatureForSelector:selector];
+        invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+        [invocation setTarget:obj];
+    } else {
+        methodSignature = [cls methodSignatureForSelector:selector];
+        invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+        [invocation setTarget:cls];
+    }
     [invocation setSelector:selector];
     
     NSUInteger numberOfArguments = methodSignature.numberOfArguments;
