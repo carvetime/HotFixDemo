@@ -118,7 +118,7 @@ static id executeSelector(id obj,NSString *clsName, NSString *selName, NSArray *
                 break;
             }
             default:
-                // TODO
+                [invocation setArgument:&argValue atIndex:i];
                 break;
         }
     }

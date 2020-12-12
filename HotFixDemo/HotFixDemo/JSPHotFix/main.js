@@ -3,10 +3,8 @@ var golbal = this
 
 
 
-function _callOC(instance,clsName,funcName){
-    var list = []
-    list.push("js args")
-    var ret = executeSelector(instance,clsName,funcName,list)
+function _callOC(instance,clsName,funcName,args){
+    var ret = executeSelector(instance,clsName,funcName,args)
     return ret
 }
 
@@ -31,6 +29,6 @@ function SWGHook(clsName, func, hookFunc){
 
 SWGHook("ViewController",{
     test2$name2$:function($,arg1,arg2){
-        _callOC($["obj"],"ViewController","haha")
+        _callOC($["obj"],"ViewController","haha:",["xiaowang"])
     }
 })

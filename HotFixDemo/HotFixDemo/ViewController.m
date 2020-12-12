@@ -45,8 +45,8 @@
 }
 
 
-- (void)haha{
-    NSLog(@"haha");
+- (void)haha:(NSString *)name{
+    NSLog(@"haha %@",name);
 }
 
 @end
