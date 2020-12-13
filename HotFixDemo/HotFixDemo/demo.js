@@ -5,6 +5,18 @@ var Methods = {}
 
 ;(function(){
     
+    var toArray = function(s){
+         try{
+             return Array.prototype.slice.call(s);
+         } catch(e){
+                 var arr = [];
+                 for(var i = 0,len = s.length; i < len; i++){
+                       arr[i] = s[i];
+                 }
+                return arr;
+         }
+     }
+    
     var _callOC = function(instance,clsName,funcName,args){
         var ret = executeSelector(instance,clsName,funcName,args)
         return ret
@@ -26,12 +38,11 @@ var Methods = {}
         if (arguments.length > 2) {
             arg2 = arguments[2] // 对象
         }
-        var callMethod = function(args){
-            log(args)
-            var ret = _callOC(arg2,arg1,arg0,args)
+        var callMethod = function(){
+            var ary = toArray(arguments);
+            var ret = _callOC(arg2,arg1,arg0,ary)
             if (ret) {
                 ret["__s"] = function(fucName){
-                    log(fucName)
                     return __s(fucName,ret["cls"],ret["obj"])
                 }
                 return ret
@@ -46,6 +57,7 @@ var Methods = {}
                 isClass: true,
                 cls: clsName,
                 __s:function(funcName){
+                    log(funcName)
                     return __s(funcName,this.cls)
                 }
             }
@@ -62,12 +74,11 @@ var Methods = {}
     SWGRequire("UIColor")
     SWGHook("ViewController",{
         test3$name3$:function(self,arg1,arg2){
-            var redView = UIView.alloc().initWithFrame$([{x:20, y:20, width:100, height:100}]);
+            var redView = UIView.alloc().initWithFrame$({x:20, y:20, width:100, height:100});
             var redColor = UIColor.redColor();
-            redView.setBackgroundColor$([redColor["obj"]]);
+            redView.setBackgroundColor$(redColor["obj"]);
             var vcView = _callOC(self["obj"],"ViewController","view",null);
             _callOC(vcView["obj"],"UIView","addSubview$",[redView["obj"]]);
-            log($)
         }
     })
     
