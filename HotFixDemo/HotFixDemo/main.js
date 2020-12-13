@@ -65,8 +65,23 @@ var Methods = {}
         return golbal[clsName]
     }
     
-    var SWGHook = function(clsName, func, hookFunc){
-        _hookOC(clsName, func,hookFunc)
+    var SWGHook = function(clsName, methods){
+        var wrap = {};
+        for(var i in methods){
+            var method = methods[i];
+            methods[i] = function(){
+                if (arguments.length > 0){
+                    var slf = arguments[0];
+                    arguments[0]["__s"] = function(funcName){
+                        log(fucName);
+                        return __s(fucName,slf["cls"],slf["obj"])
+                    }
+//                    log(arguments[0])
+                }
+                return method.__s("apply")(this,arguments)
+            }
+        }
+        _hookOC(clsName, methods)
     }
     
     
@@ -74,11 +89,15 @@ var Methods = {}
     SWGRequire("UIColor")
     SWGHook("ViewController",{
         test3$name3$:function(self,arg1,arg2){
+            log("========")
             var redView = UIView.__s("alloc")().__s("initWithFrame$")({x:20, y:20, width:100, height:100});
             var redColor = UIColor.__s("redColor")();
             redView.__s("setBackgroundColor$")(redColor["obj"]);
-            var vcView = _callOC(self["obj"],"ViewController","view",null);
-            _callOC(vcView["obj"],"UIView","addSubview$",[redView["obj"]]);
+//            var vcView = self.__s("view")();
+//            log(self)
+            
+//            var vcView = _callOC(self["obj"],"ViewController","view",null);
+//            _callOC(vcView["obj"],"UIView","addSubview$",[redView["obj"]]);
         }
     })
     
