@@ -40,8 +40,6 @@ var Methods = {}
         return callMethod
     }
     
-//    golbal.__s = __s;
-    
     var SWGRequire = function(clsName){
         if (!golbal[clsName]){
             golbal[clsName] = {
@@ -61,10 +59,21 @@ var Methods = {}
     
     
     SWGRequire("UIView")
+    SWGRequire("UIColor")
     SWGHook("ViewController",{
         test3$name3$:function($,arg1,arg2){
-            var view = UIView.__s("alloc")().__s("initWithFrame$")([{x:20, y:20, width:100, height:100}]);
-            log(view)
+            var redView = UIView.__s("alloc")().__s("initWithFrame$")([{x:20, y:20, width:100, height:100}]);
+            var redColor = UIColor.__s("redColor")();
+            redView.__s("setBackgroundColor$")([redColor["obj"]]);
+//            log(redColor)
+//            log(redView);
+            
+            
+//            var vcView = $["obj"].__s("view")();
+//            log(vcView)
+            var vcView = _callOC($["obj"],"ViewController","view",null);
+            _callOC(vcView["obj"],"UIView","addSubview$",[redView["obj"]]);
+            log($)
         }
     })
     
