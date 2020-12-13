@@ -90,19 +90,19 @@ static id executeSelector(id obj,NSString *clsName, NSString *selName, NSArray *
         const char *argTpye = [methodSignature getArgumentTypeAtIndex:i];
         id argValue = args[i-2];
         switch (argTpye[0]) {
-                SWG_ARG_CASE('c', char, argValue, charValue)
-                SWG_ARG_CASE('C', unsigned char, argValue, unsignedCharValue)
-                SWG_ARG_CASE('s', short, argValue, shortValue)
-                SWG_ARG_CASE('S', unsigned short, argValue, unsignedShortValue)
-                SWG_ARG_CASE('i', int, argValue, intValue)
-                SWG_ARG_CASE('I', unsigned int, argValue, unsignedIntValue)
-                SWG_ARG_CASE('l', long, argValue,  longValue)
-                SWG_ARG_CASE('L', unsigned long, argValue, unsignedLongValue)
-                SWG_ARG_CASE('q', long long, argValue, longLongValue)
-                SWG_ARG_CASE('Q', unsigned long long, argValue, unsignedLongLongValue)
-                SWG_ARG_CASE('f', float, argValue, floatValue)
-                SWG_ARG_CASE('d', double, argValue, doubleValue)
-                SWG_ARG_CASE('B', BOOL, argValue, boolValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_c, char, argValue, charValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_C, unsigned char, argValue, unsignedCharValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_s, short, argValue, shortValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_S, unsigned short, argValue, unsignedShortValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_i, int, argValue, intValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_I, unsigned int, argValue, unsignedIntValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_l, long, argValue,  longValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_L, unsigned long, argValue, unsignedLongValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_q, long long, argValue, longLongValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_Q, unsigned long long, argValue, unsignedLongLongValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_f, float, argValue, floatValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_d, double, argValue, doubleValue)
+                SWG_ARG_CASE(SWGNeedleSymbolType_B, BOOL, argValue, boolValue)
             case ':': {
                 SEL value = NSSelectorFromString(argValue);
                 [invocation setArgument:&value atIndex:i];
