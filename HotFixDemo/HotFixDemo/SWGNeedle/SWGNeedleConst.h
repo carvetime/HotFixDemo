@@ -7,10 +7,11 @@
 
 #ifndef SWGNeedleConst_h
 #define SWGNeedleConst_h
-
 #import <Foundation/Foundation.h>
 
 FOUNDATION_EXPORT NSString * const SWGNeedlePrefixName;
+FOUNDATION_EXPORT NSString * const SWGNeedleColonSign;
+FOUNDATION_EXPORT NSString * const SWGNeedleDollaSign;
 FOUNDATION_EXPORT char * const SWGNeedleFuncRetEmptyType;
 FOUNDATION_EXPORT char * const SWGNeedleFuncHasRetType;
 

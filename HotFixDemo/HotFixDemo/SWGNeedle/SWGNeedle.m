@@ -49,7 +49,7 @@ static id hookSelector(NSString *clsName, JSValue *jsMethods, NSArray *args){
         Method method = methodsAry[i];
         struct objc_method_description *desc = method_getDescription(method);
         NSString *methodName = NSStringFromSelector(desc->name);
-        NSString *jsFuncName = [methodName stringByReplacingOccurrencesOfString:@":" withString:@"$"];
+        NSString *jsFuncName = [methodName stringByReplacingOccurrencesOfString:SWGNeedleColonSign withString:SWGNeedleDollaSign];
         JSValue *function = jsMethods[jsFuncName];
         if (!function.isUndefined) {
             overrideMethod(cls,methodName,function);

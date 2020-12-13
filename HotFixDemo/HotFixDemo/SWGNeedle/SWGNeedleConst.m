@@ -11,6 +11,8 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 
 NSString * const SWGNeedlePrefixName = @"SWGNeedle";
+NSString * const SWGNeedleColonSign = @":";
+NSString * const SWGNeedleDollaSign = @"$";
 char * const SWGNeedleFuncRetEmptyType = "v@:@";
 char * const SWGNeedleFuncHasRetType = "@@:@";
 

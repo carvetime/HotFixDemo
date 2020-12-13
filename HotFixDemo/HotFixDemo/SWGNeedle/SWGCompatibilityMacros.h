@@ -10,6 +10,21 @@
 #ifndef SWGCompatibilityMacros_h
 #define SWGCompatibilityMacros_h
 
+#define SWGNeedleSymbolType_v 'v'
+#define SWGNeedleSymbolType_O '@'
+#define SWGNeedleSymbolType_c 'c'
+#define SWGNeedleSymbolType_C 'C'
+#define SWGNeedleSymbolType_s 's'
+#define SWGNeedleSymbolType_S 'S'
+#define SWGNeedleSymbolType_i 'i'
+#define SWGNeedleSymbolType_I 'I'
+#define SWGNeedleSymbolType_l 'l'
+#define SWGNeedleSymbolType_L 'L'
+#define SWGNeedleSymbolType_q 'q'
+#define SWGNeedleSymbolType_Q 'Q'
+#define SWGNeedleSymbolType_f 'f'
+#define SWGNeedleSymbolType_d 'd'
+#define SWGNeedleSymbolType_B 'B'
 
 #define SWG_FORT_STRING(_preStr,_sufStr) [NSString stringWithFormat:@"%@%@",_preStr,_sufStr]
 
@@ -57,7 +72,7 @@ case _typeChar: {   \
     break;  \
 }
 #define SWG_FWD_OBJ_ARG_CASE(_argType, _argList, _index)    \
-case '@': { \
+case SWGNeedleSymbolType_O: { \
     void *arg;  \
     [invocation getArgument:&arg atIndex:_index];    \
     static const char *blockType = @encode(typeof(^{}));    \
@@ -121,4 +136,5 @@ case _typeChar : { \
 
 #define SWG_CLEAR_INVCTN_ARGS(_invoctnArgs) _invoctnArgs = nil;
 
-#endif /* SWGCompatibilityMacros_h */
+
+#endif /* SWGCompatibilityMac */

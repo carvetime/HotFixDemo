@@ -47,21 +47,21 @@ IMP SWGImplementationName(NSMethodSignature *methodSignature){
     IMP SWGImpName;
     const char *retType = [methodSignature methodReturnType];
     switch (retType[0]) {
-            SWG_OVERRIDE_NAME_RET_CASE(Empty, 'v',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(Objc, '@', SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(CharVal, 'c',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(UncharVal, 'C',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(ShtVal, 's',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(UnshtVal, 'S',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(IntVal, 'i',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(UnintVal, 'I',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(longVal, 'l',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(UnlongVal, 'L',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(LongLongVal, 'q',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(UnLongLongVal, 'Q',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(FloatVal, 'f',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(DoubleVal, 'd',SWGImpName)
-            SWG_OVERRIDE_NAME_RET_CASE(BoolVal, 'B',SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(Empty, SWGNeedleSymbolType_v,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(Objc, SWGNeedleSymbolType_O, SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(CharVal, SWGNeedleSymbolType_c,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UncharVal, SWGNeedleSymbolType_C,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(ShtVal, SWGNeedleSymbolType_s,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnshtVal, SWGNeedleSymbolType_S,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(IntVal, SWGNeedleSymbolType_i,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnintVal, SWGNeedleSymbolType_I,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(longVal, SWGNeedleSymbolType_l,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnlongVal, SWGNeedleSymbolType_L,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(LongLongVal, SWGNeedleSymbolType_q,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(UnLongLongVal, SWGNeedleSymbolType_Q,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(FloatVal, SWGNeedleSymbolType_f,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(DoubleVal, SWGNeedleSymbolType_d,SWGImpName)
+            SWG_OVERRIDE_NAME_RET_CASE(BoolVal, SWGNeedleSymbolType_B,SWGImpName)
     }
     return SWGImpName;
 }
@@ -73,7 +73,7 @@ void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
     Method method = class_getInstanceMethod(cls, selector);
     char *typeDesc = (char *)method_getTypeEncoding(method);
     char *methodTypes = SWGNeedleFuncRetEmptyType;
-    if ([selName hasPrefix:@":"]){
+    if ([selName hasPrefix:SWGNeedleColonSign]){
         methodTypes = SWGNeedleFuncHasRetType;
         selName = [selName substringFromIndex:1];
     }
@@ -107,20 +107,21 @@ static NSMutableArray * exTractArgList(id slf, NSInvocation *invocation, NSMetho
     }
     for (NSUInteger i = 2; i < numberOfArguments; i++) {
         const char *argType = [methodSignature getArgumentTypeAtIndex:i];
+//        const char test = 'c';
         switch(argType[0]) {
-                SWG_FWD_ARG_CASE('c', char, argList, i)
-                SWG_FWD_ARG_CASE('C', unsigned char, argList, i)
-                SWG_FWD_ARG_CASE('s', short, argList, i)
-                SWG_FWD_ARG_CASE('S', unsigned short, argList, i)
-                SWG_FWD_ARG_CASE('i', int, argList, i)
-                SWG_FWD_ARG_CASE('I', unsigned int, argList, i)
-                SWG_FWD_ARG_CASE('l', long, argList, i)
-                SWG_FWD_ARG_CASE('L', unsigned long, argList, i)
-                SWG_FWD_ARG_CASE('q', long long, argList, i)
-                SWG_FWD_ARG_CASE('Q', unsigned long long, argList, i)
-                SWG_FWD_ARG_CASE('f', float, argList, i)
-                SWG_FWD_ARG_CASE('d', double, argList, i)
-                SWG_FWD_ARG_CASE('B', BOOL, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_c, char, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_C, unsigned char, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_s, short, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_S, unsigned short, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_i, int, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_I, unsigned int, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_l, long, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_L, unsigned long, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_q, long long, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_Q, unsigned long long, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_f, float, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_d, double, argList, i)
+                SWG_FWD_ARG_CASE(SWGNeedleSymbolType_B, BOOL, argList, i)
                 SWG_FWD_OBJ_ARG_CASE(argType,argList,i)
             case '{': {
                 NSString *typeString = [NSString stringWithUTF8String:argType];
