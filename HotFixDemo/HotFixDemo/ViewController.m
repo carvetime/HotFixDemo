@@ -36,6 +36,7 @@
     ary1[0] = @"a";
     ary1[1] = @"b";
     NSLog(@"%@",ary1[2]);
+    UIView *view;
     return nil;
 }
 

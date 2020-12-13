@@ -23,7 +23,7 @@ static const JSContext *context;
     context = [[JSContext alloc] init];
 
     context[@"log"] = ^(JSValue *val){
-        NSLog(@"log:%@",val);
+        NSLog(@"log:%@",[val toObject]);
     };
     context[@"requireClass"] = ^(NSString *clsName){
         
@@ -37,7 +37,10 @@ static const JSContext *context;
     };
     NSString *path = [[NSBundle mainBundle] pathForResource:@"main" ofType:@"js"];
     NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
-    [context evaluateScript:jsCore];
+    NSString *tryScript = [NSString stringWithFormat:@"try{%@}catch(e){ log(e.message)}",jsCore];
+    [context evaluateScript:tryScript];
+   
+    
 }
 
 static id hookSelector(NSString *clsName, JSValue *jsMethods, NSArray *args){
@@ -70,7 +73,8 @@ static void JSPForwardInvocation(id slf,SEL sel,NSInvocation *invocation){
 
 static id executeSelector(id obj,NSString *clsName, NSString *selName, NSArray *args){
     Class cls = NSClassFromString(clsName);
-    SEL selector = NSSelectorFromString(selName);
+    NSString *selReplaced = [selName stringByReplacingOccurrencesOfString:SWGNeedleDollaSign withString:SWGNeedleColonSign];
+    SEL selector = NSSelectorFromString(selReplaced);
     
     NSMethodSignature *methodSignature;
     NSInvocation *invocation;
