@@ -20,7 +20,6 @@
 		CA296888257672CB00B595C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA296887257672CB00B595C6 /* main.m */; };
 		CA296892257672CC00B595C6 /* HotFixDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA296891257672CC00B595C6 /* HotFixDemoTests.m */; };
 		CA29689D257672CC00B595C6 /* HotFixDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA29689C257672CC00B595C6 /* HotFixDemoUITests.m */; };
-		CAE631482579D8D10020404E /* JSPCore.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE631472579D8D10020404E /* JSPCore.m */; };
 		CAE631562579E38A0020404E /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = CAE631552579E38A0020404E /* main.js */; };
 		CAEA1C6425824C7E0056EBEB /* SWGMethodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEA1C6325824C7E0056EBEB /* SWGMethodModel.m */; };
 /* End PBXBuildFile section */
@@ -70,8 +69,6 @@
 		CA296898257672CC00B595C6 /* HotFixDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotFixDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA29689C257672CC00B595C6 /* HotFixDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotFixDemoUITests.m; sourceTree = "<group>"; };
 		CA29689E257672CC00B595C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CAE631462579D8D10020404E /* JSPCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSPCore.h; sourceTree = "<group>"; };
-		CAE631472579D8D10020404E /* JSPCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSPCore.m; sourceTree = "<group>"; };
 		CAE631552579E38A0020404E /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
 		CAEA1C6225824C7E0056EBEB /* SWGMethodModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWGMethodModel.h; sourceTree = "<group>"; };
 		CAEA1C6325824C7E0056EBEB /* SWGMethodModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SWGMethodModel.m; sourceTree = "<group>"; };
@@ -181,8 +178,6 @@
 		CAE6313C2579D6EC0020404E /* JSPHotFix */ = {
 			isa = PBXGroup;
 			children = (
-				CAE631462579D8D10020404E /* JSPCore.h */,
-				CAE631472579D8D10020404E /* JSPCore.m */,
 				CAE631552579E38A0020404E /* main.js */,
 			);
 			path = JSPHotFix;
@@ -326,7 +321,6 @@
 				CA0B2FD025819F440037BA48 /* SWGProxy.m in Sources */,
 				CA0B2FA025818DE90037BA48 /* SWGNeedle.m in Sources */,
 				CA296888257672CB00B595C6 /* main.m in Sources */,
-				CAE631482579D8D10020404E /* JSPCore.m in Sources */,
 				CA29687A257672CB00B595C6 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
