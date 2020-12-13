@@ -107,7 +107,6 @@ static NSMutableArray * exTractArgList(id slf, NSInvocation *invocation, NSMetho
     }
     for (NSUInteger i = 2; i < numberOfArguments; i++) {
         const char *argType = [methodSignature getArgumentTypeAtIndex:i];
-//        const char test = 'c';
         switch(argType[0]) {
                 SWG_FWD_ARG_CASE(SWGNeedleSymbolType_c, char, argList, i)
                 SWG_FWD_ARG_CASE(SWGNeedleSymbolType_C, unsigned char, argList, i)
