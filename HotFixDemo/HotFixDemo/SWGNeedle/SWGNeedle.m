@@ -134,19 +134,19 @@ static id executeSelector(id obj,NSString *clsName, NSString *selName, NSArray *
             return formatOCObj(retValue);
         } else {
             switch (retType[0]) {
-                    SWG_RET_CASE('c', char, retValue)
-                    SWG_RET_CASE('C', unsigned char, retValue)
-                    SWG_RET_CASE('s', short, retValue)
-                    SWG_RET_CASE('S', unsigned short, retValue)
-                    SWG_RET_CASE('i', int, retValue)
-                    SWG_RET_CASE('I', unsigned int, retValue)
-                    SWG_RET_CASE('l', long, retValue)
-                    SWG_RET_CASE('L', unsigned long, retValue)
-                    SWG_RET_CASE('q', long long, retValue)
-                    SWG_RET_CASE('Q', unsigned long long, retValue)
-                    SWG_RET_CASE('f', float, retValue)
-                    SWG_RET_CASE('d', double, retValue)
-                    SWG_RET_CASE('B', BOOL, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_c, char, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_C, unsigned char, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_s, short, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_S, unsigned short, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_i, int, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_I, unsigned int, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_l, long, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_L, unsigned long, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_q, long long, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_Q, unsigned long long, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_f, float, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_d, double, retValue)
+                    SWG_RET_CASE(SWGNeedleSymbolType_B, BOOL, retValue)
                 case '{': {
                     NSString *typeString = [NSString stringWithUTF8String:retType];
                     SWG_RET_STRUCT(CGRect, rectToDictionary, typeString)
