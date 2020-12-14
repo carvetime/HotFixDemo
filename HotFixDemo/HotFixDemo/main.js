@@ -65,24 +65,23 @@ var Methods = {}
         return golbal[clsName]
     }
     
-    var SWGHook = function(clsName, func, hookFunc){
-        _hookOC(clsName, func,hookFunc)
+    var SWGHook = function(clsName, methods){
+        for (var key in methods){
+            var mth = methods[key];
+            methods[key] = function(){
+                try(){
+                    mth.("apply")(this,arguments)
+                } catch(e){
+                    log(e.message)
+                }
+            };
+        }
+        _hookOC(clsName, methods)
     }
     
-    
-    SWGRequire("UIView")
-    SWGRequire("UIColor")
-    SWGHook("ViewController",{
-        test3$name3$:function(self,arg1,arg2){
-            var redView = UIView.__s("alloc")().__s("initWithFrame$")({x:20, y:20, width:100, height:100});
-            var redColor = UIColor.__s("redColor")();
-            redView.__s("setBackgroundColor$")(redColor["obj"]);
-            var vcView = _callOC(self["obj"],"ViewController","view",null);
-            _callOC(vcView["obj"],"UIView","addSubview$",[redView["obj"]]);
-        }
-    })
-    
-    
+    golbal.SWGRequire = SWGRequire;
+    golbal.SWGHook = SWGHook;
+
 })()
 
 
@@ -115,5 +114,22 @@ var Methods = {}
 //        _callOC(superView["obj"],"UIView","addSubview:",[view["obj"]]);
 //    }
 //})
+
+
+
+
+
+SWGRequire("UIView")
+SWGRequire("UIColor")
+SWGHook("ViewController",{
+    test3$name3$:function(self,arg1,arg2){
+        log("=========")
+//            var redView = UIView.__s("__s")("alloc")().__s("__s")("initWithFrame$")({x:20, y:20, width:100, height:100});
+//            var redColor = UIColor.__s("__s")("redColor")();
+//            redView.__s("__s")("setBackgroundColor$")(redColor["obj"]);
+//            var vcView = _callOC(self["obj"],"ViewController","view",null);
+//            _callOC(vcView["obj"],"UIView","addSubview$",[redView["obj"]]);
+    }
+})
 
 

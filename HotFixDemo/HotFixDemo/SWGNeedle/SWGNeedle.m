@@ -35,7 +35,7 @@ static const JSContext *context;
     context[@"executeSelector"] = ^(id obj,NSString *className,NSString *fucName, NSArray *args) {
         return executeSelector(obj,className, fucName, args);
     };
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"main" ofType:@"js"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"js"];
     NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
     NSString *tryScript = [NSString stringWithFormat:@"try{%@}catch(e){ log(e.message)}",jsCore];
     [context evaluateScript:tryScript];

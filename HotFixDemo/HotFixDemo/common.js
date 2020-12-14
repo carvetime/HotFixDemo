@@ -118,23 +118,3 @@ var Methods = {}
 //})
 
 
-
-
-
-SWGRequire("UIView")
-SWGRequire("UIColor")
-SWGHook("ViewController",{
-    test3$name3$:function(self,arg1,arg2){
-        log("=========")
-        var redView = UIView.__s("alloc")().__s("initWithFrame$")({x:20, y:20, width:100, height:100});
-        var redColor = UIColor.__s("redColor")();
-        redView.__s("setBackgroundColor$")(redColor["obj"])
-        var vcView = self.__s("view")();
-        log(vcView)
-        vcView.__s("addSubview$")(redView["obj"]);
-        
-//        vcView["obj"].__s("addSubview$")(redColor["obj"])
-    }
-})
-
-
