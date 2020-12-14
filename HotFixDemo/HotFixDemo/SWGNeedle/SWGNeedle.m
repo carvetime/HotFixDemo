@@ -44,7 +44,6 @@ static const JSContext *context;
 }
 
 static id hookSelector(NSString *clsName, JSValue *jsMethods, NSArray *args){
-    
     Class cls = NSClassFromString(clsName);
     unsigned int countOfmethods = 0;
     Method *methodsAry = class_copyMethodList(cls, &countOfmethods);
@@ -60,15 +59,6 @@ static id hookSelector(NSString *clsName, JSValue *jsMethods, NSArray *args){
     }
     return nil;
 }
-
-
-static void JSPForwardInvocation(id slf,SEL sel,NSInvocation *invocation){
-    NSString *selectorName = NSStringFromSelector(invocation.selector);
-    SEL jsSelector = NSSelectorFromString(SWG_FORT_STRING(SWGNeedlePrefixName, selectorName));
-    [invocation setSelector:jsSelector];
-    [invocation invoke];
-}
-
 
 
 static id executeSelector(id obj,NSString *clsName, NSString *selName, NSArray *args){
