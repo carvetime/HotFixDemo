@@ -10,6 +10,7 @@
 
 #import <JavaScriptCore/JavaScriptCore.h>
 
+BOOL const SWGNeedleDebug = NO;
 NSString * const SWGNeedlePrefixName = @"SWGNeedle";
 NSString * const SWGNeedleColonSign = @":";
 NSString * const SWGNeedleDollaSign = @"$";

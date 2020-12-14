@@ -137,4 +137,5 @@ case _typeChar : { \
 #define SWG_CLEAR_INVCTN_ARGS(_invoctnArgs) _invoctnArgs = nil;
 
 
+
 #endif /* SWGCompatibilityMac */

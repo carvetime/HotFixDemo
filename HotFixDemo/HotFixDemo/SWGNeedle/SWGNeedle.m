@@ -49,9 +49,7 @@ SWG_DEFINE_METHOD_IMP_RET_STRUCT(NSRange,SWGMethods,SWGInvocationArgs,return dic
     context[@"SWGLog"] = ^(JSValue *val){
         NSLog(@"log:%@",[val toObject]);
     };
-    context[@"requireClass"] = ^(NSString *clsName){
-        
-    };
+    
     context[@"hookSelector"] = ^(NSString *className,JSValue *jsMethods, NSArray *args) {
         return hookSelector(className, jsMethods, args);
     };
@@ -61,8 +59,12 @@ SWG_DEFINE_METHOD_IMP_RET_STRUCT(NSRange,SWGMethods,SWGInvocationArgs,return dic
     };
     NSString *path = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"js"];
     NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
-    NSString *tryScript = [NSString stringWithFormat:@"try{%@}catch(e){ log(e.message)}",jsCore];
-    [context evaluateScript:tryScript];
+    
+    if (SWGNeedleDebug){
+        jsCore = [NSString stringWithFormat:@"try{%@}catch(e){ log(e.message)}",jsCore];
+    }
+    
+    [context evaluateScript:jsCore];
    
     
 }
