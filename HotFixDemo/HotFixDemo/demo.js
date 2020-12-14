@@ -3,10 +3,10 @@ var global = this
 
 ;(function(){
     
-    var _transToArray = function(s){
+    var _transToArray = function(agrs){
          var arr = [];
-         for(var i = 0,len = s.length; i < len; i++){
-             var obj = s[i];
+         for(var i = 0,len = agrs.length; i < len; i++){
+             var obj = agrs[i];
              if (obj && obj["obj"]){
                  arr[i] = obj["obj"]
              } else {
@@ -17,21 +17,10 @@ var global = this
      }
     
     var __s = function(){
-        var agr0 = null;
-        var arg1 = null;
-        var arg2 = null;
-        if (arguments.length > 0) {
-            arg0 = arguments[0]// 方法名
-        }
-        if (arguments.length > 1) {
-            arg1 = arguments[1] // 类名
-        }
-        if (arguments.length > 2) {
-            arg2 = arguments[2] // 对象
-        }
+        var outArgs = arguments;
         var callMethod = function(){
             var ary = _transToArray(arguments);
-            var ret = executeSelector(arg2,arg1,arg0,ary)
+            var ret = executeSelector(outArgs[2],outArgs[1],outArgs[0],ary)
             if (ret) {
                 ret["__s"] = function(fucName){
                     return __s(fucName,ret["cls"],ret["obj"])
