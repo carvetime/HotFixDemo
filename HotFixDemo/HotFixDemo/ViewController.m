@@ -17,7 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [SWGNeedle prepare];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"swgbundle"];
+    [SWGNeedle startWithBundleURL:url];
     // Do any additional setup after loading the view.
 }
 

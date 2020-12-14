@@ -20,7 +20,7 @@
 		CA296892257672CC00B595C6 /* HotFixDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA296891257672CC00B595C6 /* HotFixDemoTests.m */; };
 		CA29689D257672CC00B595C6 /* HotFixDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA29689C257672CC00B595C6 /* HotFixDemoUITests.m */; };
 		CA80B8112586267B00071DAF /* common.js in Resources */ = {isa = PBXBuildFile; fileRef = CA80B8102586267B00071DAF /* common.js */; };
-		CA92D07A2585FC720026086F /* demo.js in Resources */ = {isa = PBXBuildFile; fileRef = CA92D0792585FC720026086F /* demo.js */; };
+		CA92D07A2585FC720026086F /* demo.swgbundle in Resources */ = {isa = PBXBuildFile; fileRef = CA92D0792585FC720026086F /* demo.swgbundle */; };
 		CA92D08F2586084B0026086F /* compile.js in Resources */ = {isa = PBXBuildFile; fileRef = CA92D08E2586084B0026086F /* compile.js */; };
 		CAFAEFDB2586DD480090FC0C /* business.js in Resources */ = {isa = PBXBuildFile; fileRef = CAFAEFDA2586DD480090FC0C /* business.js */; };
 /* End PBXBuildFile section */
@@ -69,7 +69,7 @@
 		CA29689C257672CC00B595C6 /* HotFixDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotFixDemoUITests.m; sourceTree = "<group>"; };
 		CA29689E257672CC00B595C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA80B8102586267B00071DAF /* common.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = common.js; sourceTree = "<group>"; };
-		CA92D0792585FC720026086F /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
+		CA92D0792585FC720026086F /* demo.swgbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo.swgbundle; sourceTree = "<group>"; };
 		CA92D08E2586084B0026086F /* compile.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = compile.js; sourceTree = "<group>"; };
 		CAFAEFDA2586DD480090FC0C /* business.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = business.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,7 +139,7 @@
 				CA92D08E2586084B0026086F /* compile.js */,
 				CAFAEFDA2586DD480090FC0C /* business.js */,
 				CA80B8102586267B00071DAF /* common.js */,
-				CA92D0792585FC720026086F /* demo.js */,
+				CA92D0792585FC720026086F /* demo.swgbundle */,
 				CA0B2F9D25818D670037BA48 /* SWGNeedle */,
 				CA296875257672CB00B595C6 /* AppDelegate.h */,
 				CA296876257672CB00B595C6 /* AppDelegate.m */,
@@ -282,7 +282,7 @@
 				CA92D08F2586084B0026086F /* compile.js in Resources */,
 				CA80B8112586267B00071DAF /* common.js in Resources */,
 				CA296880257672CB00B595C6 /* Main.storyboard in Resources */,
-				CA92D07A2585FC720026086F /* demo.js in Resources */,
+				CA92D07A2585FC720026086F /* demo.swgbundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

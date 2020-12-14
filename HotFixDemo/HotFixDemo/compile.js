@@ -10,7 +10,7 @@ var sourceString2 = sourceString2.replace(/\.\s*([\$\w]+)\s*\(/g,`.__s(\"$1\")(`
 
 var mergeString = sourceString1 + '\n' + sourceString2;
 
-fs.writeFile('demo.js', mergeString, function (err) {
+fs.writeFile('demo.swgbundle', mergeString, function (err) {
   if (err) throw err;
   console.log('compiled successfully!');
 });

@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SWGNeedle : NSObject
 
-+ (void)prepare;
++ (void)startWithBundleURL:(NSURL *)bundleURL;
 
 @end
 

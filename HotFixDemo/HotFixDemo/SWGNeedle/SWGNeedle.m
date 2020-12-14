@@ -35,14 +35,17 @@ SWG_DEFINE_METHOD_IMP_RET(float,SWGMethods,SWGInvocationArgs,floatValue,FloatVal
 SWG_DEFINE_METHOD_IMP_RET(double,SWGMethods,SWGInvocationArgs,doubleValue,DoubleVal)
 SWG_DEFINE_METHOD_IMP_RET(BOOL,SWGMethods,SWGInvocationArgs,boolValue,BoolVal)
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
 SWG_DEFINE_METHOD_IMP_RET_STRUCT(CGRect,SWGMethods,SWGInvocationArgs,return dictToRect([ret toObject]),Rect)
 SWG_DEFINE_METHOD_IMP_RET_STRUCT(CGSize,SWGMethods,SWGInvocationArgs,return dictToSize([ret toObject]),Size)
 SWG_DEFINE_METHOD_IMP_RET_STRUCT(CGPoint,SWGMethods,SWGInvocationArgs,return dictToPoint([ret toObject]),Point)
 SWG_DEFINE_METHOD_IMP_RET_STRUCT(NSRange,SWGMethods,SWGInvocationArgs,return dictToRange([ret toObject]),Range)
+#pragma clang diagnostic pop
 
 @implementation SWGNeedle
 
-+ (void)prepare{
++ (void)startWithBundleURL:(NSURL *)bundleURL{
     
     context = [[JSContext alloc] init];
 
@@ -57,16 +60,19 @@ SWG_DEFINE_METHOD_IMP_RET_STRUCT(NSRange,SWGMethods,SWGInvocationArgs,return dic
     context[@"executeSelector"] = ^(id obj,NSString *className,NSString *fucName, NSArray *args) {
         return executeSelector(obj,className, fucName, args);
     };
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"js"];
-    NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
+
+    NSError *error;
+    NSString *jsCore = [[NSString alloc] initWithContentsOfURL:bundleURL encoding:NSUTF8StringEncoding error:&error];
     
     if (SWGNeedleDebug){
         jsCore = [NSString stringWithFormat:@"try{%@}catch(e){ log(e.message)}",jsCore];
     }
     
-    [context evaluateScript:jsCore];
-   
+    if (error) {
+        NSLog(@"error : %@", error.localizedDescription);
+    }
     
+    [context evaluateScript:jsCore];
 }
 
 static id hookSelector(NSString *clsName, JSValue *jsMethods, NSArray *args){
@@ -220,7 +226,11 @@ void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
         methodTypes = SWGNeedleFuncHasRetType;
         selName = [selName substringFromIndex:1];
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
     class_replaceMethod(cls, selector, class_getMethodImplementation(cls, @selector(__SWGImplementSelector)), typeDesc);
+#pragma clang diagnostic pop
+    
     class_replaceMethod(cls, @selector(forwardInvocation:), (IMP)(SWGForwardInvocation), methodTypes);
     NSString *swgSelName = SWG_FORT_STRING(SWGNeedlePrefixName, selName);
     SEL SWGSel = NSSelectorFromString(swgSelName);
