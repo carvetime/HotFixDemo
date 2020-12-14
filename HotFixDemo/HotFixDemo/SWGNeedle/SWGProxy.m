@@ -10,7 +10,6 @@
 #import "SWGNeedleConst.h"
 #import "SWGCompatibilityMacros.h"
 #import "SWGUtil.h"
-#import "SWGMethodModel.h"
 
 static const NSMutableDictionary *SWGMethods;
 static NSArray *SWGInvocationArgs;
@@ -44,7 +43,7 @@ SWG_DEFINE_METHOD_IMP_RET_STRUCT(NSRange,SWGMethods,SWGInvocationArgs,return dic
 
 
 IMP SWGImplementationName(NSMethodSignature *methodSignature){
-    IMP SWGImpName;
+    IMP SWGImpName = nil;
     const char *retType = [methodSignature methodReturnType];
     switch (retType[0]) {
             SWG_OVERRIDE_NAME_RET_CASE(Empty, SWGNeedleSymbolType_v,SWGImpName)
@@ -78,7 +77,7 @@ void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
         selName = [selName substringFromIndex:1];
     }
     class_replaceMethod(cls, selector, class_getMethodImplementation(cls, @selector(__SWGImplementSelector)), typeDesc);
-    IMP forwadImp = class_replaceMethod(cls, @selector(forwardInvocation:), (IMP)(SWGForwardInvocation), methodTypes);
+    class_replaceMethod(cls, @selector(forwardInvocation:), (IMP)(SWGForwardInvocation), methodTypes);
     NSString *swgSelName = SWG_FORT_STRING(SWGNeedlePrefixName, selName);
     SEL SWGSel = NSSelectorFromString(swgSelName);
     SWG_SET_METHOD_DICT(SWGMethods,clsName,swgSelName,jsMethod);
@@ -87,7 +86,6 @@ void overrideMethod(Class cls, NSString *selName, JSValue *jsMethod){
 
 static void SWGForwardInvocation(id slf,SEL sel,NSInvocation *invocation){
     NSMethodSignature *methodSignature = [invocation methodSignature];
-    NSInteger numberOfArguments = [methodSignature numberOfArguments];
     NSString *selectorName = NSStringFromSelector(invocation.selector);
     SEL jsSelector = NSSelectorFromString(SWG_FORT_STRING(SWGNeedlePrefixName, selectorName));
     
