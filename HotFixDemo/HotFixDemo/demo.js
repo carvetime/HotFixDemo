@@ -79,13 +79,14 @@ var global = this
 
 
 
-SWGRequire("UIView")
+SWGRequire("UITextView")
 SWGRequire("UIColor")
 SWGHook("ViewController",{
-    test3$name3$:function(self,arg1,arg2){
-        var redView = UIView.__s("alloc")().__s("initWithFrame$")({x:20, y:20, width:100, height:100});
+    test1$test2$:function(self,arg1,arg2){
+        var redView = UITextView.__s("alloc")().__s("initWithFrame$")({x:20, y:20, width:300, height:500});
         var redColor = UIColor.__s("redColor")();
         redView.__s("setBackgroundColor$")(redColor)
+        redView.__s("setText$")( "arg1:" + arg1 + "\n" + "arg2:" + arg2);
         self.__s("view")().__s("addSubview$")(redView);
         SWGLog("hook finished!")
     }

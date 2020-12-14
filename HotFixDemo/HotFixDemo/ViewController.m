@@ -23,24 +23,12 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-//    NSString *test =  [self _test1_:@"has ret" _name2:@"xiaoming"];
-//    NSLog(@"%@",test);
-//    UIView *view = [self test2:@"no ret" name2:@"xiaoming"];
-//    [self.view addSubview:view];
-    [self test3:@"add subviwe" name3:@"green"];
+    [self test1:@"addRedText" test2:@"123412312312"];
 }
 
 
-- (UIView *)test2:(NSString *)name name2:(NSString *)name2{
-    NSMutableArray *ary1 = @[].mutableCopy;
-    ary1[0] = @"a";
-    ary1[1] = @"b";
-    NSLog(@"%@",ary1[2]);
-    UIView *view;
-    return nil;
-}
 
-- (void)test3:(NSString *)name name3:(NSString *)name2{
+- (void)test1:(NSString *)name test2:(NSString *)name2{
     NSMutableArray *ary1 = @[].mutableCopy;
     ary1[0] = @"a";
     ary1[1] = @"b";
@@ -48,18 +36,5 @@
 }
 
 
-
-- (NSString *)_test1_:(NSString *)name _name2:(NSString *)name2{
-    NSMutableArray *ary1 = @[].mutableCopy;
-    ary1[0] = @"a";
-    ary1[1] = @"b";
-    return ary1[2];
-}
-
-
-- (NSString *)haha:(NSString *)name{
-    NSLog(@"haha %@",name);
-    return name;
-}
 
 @end
