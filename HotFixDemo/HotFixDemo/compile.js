@@ -1,5 +1,5 @@
 
-
+console.log('compile start ...');
 var fs = require("fs")
 var source1 = fs.readFileSync('common.js');
 var sourceString1 = source1.toString();
@@ -12,6 +12,6 @@ var mergeString = sourceString1 + '\n' + sourceString2;
 
 fs.writeFile('demo.js', mergeString, function (err) {
   if (err) throw err;
-  console.log('Saved!');
+  console.log('compile success!');
 });
 
