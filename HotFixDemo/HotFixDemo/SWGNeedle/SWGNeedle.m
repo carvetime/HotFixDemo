@@ -22,7 +22,7 @@ static const JSContext *context;
     
     context = [[JSContext alloc] init];
 
-    context[@"log"] = ^(JSValue *val){
+    context[@"SWGLog"] = ^(JSValue *val){
         NSLog(@"log:%@",[val toObject]);
     };
     context[@"requireClass"] = ^(NSString *clsName){
